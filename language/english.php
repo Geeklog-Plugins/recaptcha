@@ -5,7 +5,7 @@
 // +---------------------------------------------------------------------------+
 // | geeklog/plugins/recaptcha/language/english.php                            |
 // +---------------------------------------------------------------------------+
-// | Copyright (C) 2014 mystral-kk - geeklog AT mystral-kk DOT net             |
+// | Copyright (C) 2014-2015 mystral-kk - geeklog AT mystral-kk DOT net        |
 // |                                                                           |
 // | Based on the CAPTCHA Plugin by Ben                                        |
 // |                                                   - ben AT geeklog DOT fr |
@@ -36,7 +36,7 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== FALSE) {
 $LANG_RECAPTCHA = array(
 	'plugin'      => 'reCAPTCHA',
 	'admin'       => 'reCAPTCHA',
-	'entry_error' => 'An invalid reCAPTCHA string was entered in %s - IP Address: %s',	// 1st %s = $type, 2nd %s = $ip
+	'entry_error' => 'An invalid reCAPTCHA string was entered in %1s - IP Address: %2s - Error Codes: %3s',	// %1s = $type, %2s = $ip, %3s = $errorCode
 );
 
 // Localization of the Admin Configuration UI

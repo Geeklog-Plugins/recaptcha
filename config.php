@@ -5,7 +5,7 @@
 // +---------------------------------------------------------------------------+
 // | geeklog/plugins/recaptcha/config.php                                      |
 // +---------------------------------------------------------------------------+
-// | Copyright (C) 2014 mystral-kk - geeklog AT mystral-kk DOT net             |
+// | Copyright (C) 2014-2015 mystral-kk - geeklog AT mystral-kk DOT net        |
 // |                                                                           |
 // | Based on the CAPTCHA Plugin by Ben                                        |
 // |                                                   - ben AT geeklog DOT fr |
@@ -37,8 +37,8 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== FALSE) {
 $_RECAPTCHA_CONF = array();
 
 // Plugin info
-$_RECAPTCHA_CONF['pi_version'] = '1.0.1';					// Plugin Version
-$_RECAPTCHA_CONF['gl_version'] = '1.5.0';					// GL Version plugin for
+$_RECAPTCHA_CONF['pi_version'] = '1.1.0';					// Plugin Version
+$_RECAPTCHA_CONF['gl_version'] = '1.6.0';					// GL Version plugin for
 $_RECAPTCHA_CONF['pi_url']     = 'http://mystral-kk.net/';	// Plugin Homepage
 $_RECAPTCHA_CONF['GROUPS']     = array(
 	'reCAPTCHA Admin' => 'Users in this group can administer the ReCAPTCHA plugin',

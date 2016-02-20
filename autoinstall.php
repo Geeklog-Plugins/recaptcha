@@ -5,7 +5,7 @@
 // +---------------------------------------------------------------------------+
 // | geeklog/plugins/recaptcha/autoinstall.php                                 |
 // +---------------------------------------------------------------------------+
-// | Copyright (C) 2014 mystral-kk - geeklog AT mystral-kk DOT net             |
+// | Copyright (C) 2014-2015 mystral-kk - geeklog AT mystral-kk DOT net        |
 // |                                                                           |
 // | Based on the CAPTCHA Plugin by Ben                                        |
 // |                                                   - ben AT geeklog DOT fr |
@@ -64,7 +64,7 @@ function plugin_autoinstall_recaptcha($pi_name) {
 * Load plugin configuration from database
 *
 * @param    string  $pi_name    Plugin name
-* @return   boolean             TRUE on success, otherwise FALSE
+* @return   boolean             true on success, otherwise false
 * @see      plugin_initconfig_recaptcha
 */
 function plugin_load_configuration_recaptcha($pi_name) {
@@ -87,5 +87,5 @@ function plugin_load_configuration_recaptcha($pi_name) {
 function plugin_compatible_with_this_version_recaptcha($pi_name) {
 	global $_CONF;
 
-	return true;
+	return (version_compare(PHP_VERSION, '5.3.0') >= 0);
 }

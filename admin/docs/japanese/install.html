@@ -14,6 +14,12 @@
 
 <p>ReCAPTCHA&reg;は強力な<acronym title="Completely Automated Public Turing test to tell Computers and Humans Apart">CAPTCHA</acronym>を提供する無料の対ボットシステムです。このプラグインを使うことで、GeeklogでreCAPTCHAを簡単に利用できるようになります。</p>
 
+<h2>システム要件</h2>
+
+<ul>
+	<li>Geeklog-1.6.0以降</li>
+	<li style="background-color: #ff99ff;">バージョン1.1.0以降、PHP-5.3.2が必要になりました。PHP-5-3.0やPHP-5.3.1でも動作すると思いますが、確認はしていません</li>
+</ul>
 <h2>インストール</h2>
 
 <p>以下の説明で、</p>
@@ -38,10 +44,27 @@
 	<li>インストールの過程で作成した2つのディレクトリ（<span class="geeklog">&lt;geeklog-dir&gt;</span>/plugins/recaptcha/と<span class="admin">&lt;admin&gt;</span>/plugins/recaptcha/ を削除します。</li>
 </ol>
 
+<h2>アップグレード</h2>
+
+<ol>
+	<li>管理者としてサイトにログインしてから、プラグインエディタでreCAPTCHAプラグインを無効にします。</li>
+	<li>インストール時と同様に、recaptchaプラグインのアーカイブを展開してからサーバーにアップロードします。</li>
+	<li>プラグインエディタでreCAPTCHAを有効にしてから、アップグレードします。</li>
+</ol>
+
 <h2>更新履歴</h2>
 
 <table>
 	<tr><th>バージョン</th><th>日付(YYYY-MM-DD)</th><th>説明</th></tr>
+	<tr>
+		<td>1.1.0</td><td>2015-07-03</td>
+		<td>
+			<ul>
+				<li>Google reCAPTCHA v2にアップグレードしました。</li>
+				<li>ログファイルの項目にエラーコードを追加しました。パッチ提供はTomさんです。</li>
+			</ul>
+		</td>
+	</tr>
 	<tr>
 		<td>1.0.1</td><td>2014-01-26</td>
 		<td>
@@ -57,7 +80,7 @@
 </table>
 
 <div class="footer">
-Copyright (C) 2014 mystral-kk - geeklog AT mystral-kk DOT net
+Copyright (C) 2014-2015 mystral-kk - geeklog AT mystral-kk DOT net
 </div>
 
 </body>

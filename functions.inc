@@ -5,7 +5,7 @@
 // +---------------------------------------------------------------------------+
 // | geeklog/plugins/recaptcha/functions.inc                                   |
 // +---------------------------------------------------------------------------+
-// | Copyright (C) 2014 mystral-kk - geeklog AT mystral-kk DOT net             |
+// | Copyright (C) 2014-2015 mystral-kk - geeklog AT mystral-kk DOT net        |
 // |                                                                           |
 // | Based on the CAPTCHA Plugin by Ben                                        |
 // |                                                   - ben AT geeklog DOT fr |
@@ -30,7 +30,7 @@
 // |                                                                           |
 // +---------------------------------------------------------------------------+
 
-if (stripos($_SERVER['PHP_SELF'], 'functions.inc') !== false) {
+if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== false) {
 	die('This file cannot be used on its own.');
 }
 
@@ -49,7 +49,7 @@ global $_RECAPTCHA_CONF;
 
 require_once $_CONF['path'] . 'plugins/recaptcha/config.php';
 RECAPTCHA_loadConfig();
-require_once $_CONF['path'] . 'plugins/recaptcha/vendor/recaptchalib.php';
+require_once $_CONF['path'] . 'plugins/recaptcha/vendor/autoload.php';
 
 // +---------------------------------------------------------------------------+
 // | Geeklog Plugin API Implementations                                        |
@@ -145,6 +145,10 @@ function plugin_upgrade_recaptcha() {
 				$pi_version = '1.0.1';
 				break;
 
+			case '1.0.1':
+				$pi_version = '1.1.0';
+				break;
+
 			default:
 				$pi_version = $_RECAPTCHA_CONF['pi_version'];
 				break;
@@ -222,18 +226,12 @@ function plugin_templatesetvars_recaptcha($type, &$template) {
 	global $_RECAPTCHA_CONF;
 
 	if (RECAPTCHA_isEnabled() && RECAPTCHA_requireCaptcha($type)) {
-		if ((isset($_SERVER['HTTPS']) &&
-					(($_SERVER['HTTPS'] === 'on') || ($_SERVER['HTTPS'] === '1'))) ||
-			(isset($_SERVER['HTTP_X_FORWARDED_BY']) &&
-					(stripos($_SERVER['HTTP_X_FORWARDED_BY'], 'SSL') !== false)) ||
-			(isset($_SERVER['HTTP_X_FORWARDED_HOST']) &&
-					(stripos($_SERVER['HTTP_X_FORWARDED_HOST'],'SSL') !== false))) {
-			$use_ssl = true;
-		} else {
-			$use_ssl = false;
-		}
-
-		$captcha = '<div class="gl-recaptcha_' . $type . '">' . recaptcha_get_html($_RECAPTCHA_CONF['public_key'], $error, $use_ssl) . '</div>';
+		$lang = RECAPTCHA_getLangCode();
+		$captcha = '<div class="g-recaptcha" data-sitekey="'
+				 . RECAPTCHA_esc($_RECAPTCHA_CONF['public_key']) . '"></div>'
+				 . '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl='
+				 . RECAPTCHA_esc($lang) . '"></script>';
+;
 	} else {
 		$captcha = '';
 	}
@@ -260,32 +258,25 @@ function plugin_commentPreSave_recaptcha($uid, $title, $comment, $sid, $pid, $ty
 * @return    string    empty = success
 */
 function plugin_itemPreSave_recaptcha($type, $content = '') {
-	global $_RECAPTCHA_CONF, $LANG_RECAPTCHA, $_SERVER;
+	global $_RECAPTCHA_CONF;
 
 	$msg = '';
 
 	if (RECAPTCHA_isEnabled() && RECAPTCHA_requireCaptcha($type)) {
-		$challenge = isset($_POST['recaptcha_challenge_field'])
-				   ? COM_applyFilter($_POST['recaptcha_challenge_field'])
-				   : '';
-		$response  = isset($_POST['recaptcha_response_field'])
-				   ? COM_applyFilter($_POST['recaptcha_response_field'])
-				   : '';
-		$extra_params = array();
-		$answer = recaptcha_check_answer(
-			$_RECAPTCHA_CONF['private_key'], $_SERVER['REMOTE_ADDR'], $challenge,
-			$response, $extra_params
-		);
-
-		if (!$answer->is_valid) {
+		$recaptcha = new \ReCaptcha\ReCaptcha($_RECAPTCHA_CONF['private_key']);
+		$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+		
+		if (!$resp->isSuccess()) {
 			if ($_RECAPTCHA_CONF['logging']) {
+				$errorCode = implode(', ', $resp->getErrorCodes());
 				$msg = sprintf(
 					RECAPTCHA_str('entry_error', true),
 					$type,
-					$_SERVER['REMOTE_ADDR']
+					$_SERVER['REMOTE_ADDR'],
+					$errorCode
 				);
 				$msg = RECAPTCHA_esc($msg);
-				reCAPTCHA_errorLog($msg);
+				RECAPTCHA_errorLog($msg);
 			}
 		}
 	}
@@ -296,10 +287,10 @@ function plugin_itemPreSave_recaptcha($type, $content = '') {
 /**
 * Writes an entry into a log file
 *
-* @param    string    $logentry
+* @param    string    $logEntry
 * @param    int       $override
 */
-function reCAPTCHA_errorLog($logentry, $override = 0) {
+function RECAPTCHA_errorLog($logEntry, $override = 0) {
 	global $_CONF, $_RECAPTCHA_CONF;
 
 	if (!isset($_RECAPTCHA_CONF['logging'])) {
@@ -310,13 +301,13 @@ function reCAPTCHA_errorLog($logentry, $override = 0) {
 		return;
 	}
 
-	if (!empty($logentry)) {
+	if (!empty($logEntry)) {
 		$timestamp = date('Y-m-d H:i:s');
 		$logfile = $_CONF['path_log'] . 'recaptcha.log';
-		$entry   = "{$timestamp} - {$logentry} \n";
+		$entry   = "{$timestamp} - {$logEntry} \n";
 		
 		if (($file = @fopen($logfile, 'a')) !== false) {
-			fputs($file, "$timestamp - $logentry \n");
+			fputs($file, "$timestamp - $logEntry \n");
 			fclose($file);
 		} else {
 			COM_errorLog(__FUNCTION__ . ': cannot open "' . $logfile . '"');
@@ -421,4 +412,61 @@ function RECAPTCHA_isEnabled() {
 	global $_RECAPTCHA_CONF;
 
 	return ($_RECAPTCHA_CONF['private_key'] !== '') && ($_RECAPTCHA_CONF['public_key'] !== '');
+}
+
+/**
+* Return language codes used by Google
+*
+* @return    string
+* @link      https://developers.google.com/recaptcha/docs/language
+*/
+function RECAPTCHA_getLangCode() {
+	$mapping = array(
+		// GL language name   => Google language code
+		'afrikaans'           => 'en',	// Not supported by Google
+		'bosnian'             => 'en',	// Not supported by Google
+		'bulgarian'           => 'bg',
+		'catalan'             => 'ca',
+		'chinese_simplified'  => 'zh-CN',
+		'chinese_traditional' => 'zh-TW',
+		'croatian'            => 'hr',
+		'czech'               => 'cs',
+		'danish'              => 'da',
+		'dutch'               => 'nl',
+		'english'             => 'en',
+		'estonian'            => 'et',
+		'farsi'               => 'fa',
+		'finnish'             => 'fi',
+		'french_canada'       => 'fr-CA',
+		'french_france'       => 'fr',
+		'german'              => 'de',
+		'german_formal'       => 'de',
+		'hebrew'              => 'iw',
+		'hellenic'            => 'el',
+		'indonesian'          => 'id',
+		'italian'             => 'it',
+		'japanese'            => 'ja',
+		'korean'              => 'ko',
+		'norwegian'           => 'no',
+		'polish'              => 'pl',
+		'portuguese'          => 'pt',
+		'portuguese_brazil'   => 'pt-BR',
+		'romanian'            => 'ro',
+		'russian'             => 'ru',
+		'serbian'             => 'sr',
+		'slovak'              => 'sk',
+		'slovenian'           => 'sl',
+		'spanish'             => 'es',
+		'spanish_argentina'   => 'es-419',
+		'swedish'             => 'sv',
+		'turkish'             => 'tr',
+		'ukrainian'           => 'uk',
+		'ukrainian_koi8-u'    => 'uk',
+	);
+
+	$langName = COM_getLanguage();
+	$langName = strtolower($langName);
+	$langName = str_replace('_utf-8', '', $langName);
+
+	return isset($mapping[$langName]) ? $mapping[$langName] : 'en';
 }

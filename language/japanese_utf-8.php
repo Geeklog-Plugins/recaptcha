@@ -5,7 +5,7 @@
 // +---------------------------------------------------------------------------+
 // | geeklog/plugins/recaptcha/language/japanese_utf-8.php                     |
 // +---------------------------------------------------------------------------+
-// | Copyright (C) 2014 mystral-kk - geeklog AT mystral-kk DOT net             |
+// | Copyright (C) 2014-2015 mystral-kk - geeklog AT mystral-kk DOT net        |
 // |                                                                           |
 // | Based on the CAPTCHA Plugin by Ben                                        |
 // |                                                   - ben AT geeklog DOT fr |
@@ -36,7 +36,7 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== FALSE) {
 $LANG_RECAPTCHA = array (
 	'plugin'      => 'reCAPTCHA',
 	'admin'       => 'reCAPTCHA',
-	'entry_error' => '%sで無効な入力を検出しました。IPアドレス: %s',	// 1st %s = $type, 2nd %s = $ip
+	'entry_error' => '%1sで無効な入力を検出しました。IPアドレス: %2s  エラーコード: %3s',	// %1s = $type, %2s = $ip, %3s = $errorCode
 );
 
 // Localization of the Admin Configuration UI
