@@ -1,6 +1,6 @@
 # Install/Uninstall/Upgrade instruction for the Geeklog reCAPTCHA plugin
 
-* Repository: https://github.com/mystralkk/geeklog-recaptcha
+* Repository: https://github.com/mystralkk/recaptcha
 * Version: 1.1.0
 * License: GPL v2 or later
 
@@ -10,26 +10,26 @@ ReCAPTCHA(R) is a free anti-bot service providing powerful CAPTCHA(Completely Au
 
 ## System Requirements
 
-* Geeklog-1.6.0+
+* Geeklog-1.5.0+
 * PHP-5.3.2+.  Maybe PHP-5-3.0 or PHP-5.3.1 will do, but I am not sure.
 
 ## INSTALL
 
 In the following descriptions
 
-* *geeklog_dir* is the directory where the system config.php file resides
-* *admin* is the directory where the administration files reside (usually, under *public_html*)
+* <geeklog_dir> is the directory where the system config.php file resides
+* <admin> is the directory where the administration files reside (usually, under <public_html>)
 
-1.  Uncompress the recaptcha plugin archive while in the *geeklog_dir*/plugins directory. The archive will create a directory called recaptcha in the plugins directory.
-2.  Create the admin directory. Under your *admin*/plugins/ directory, create a directory called recaptcha.
-3.  Change to your *geeklog_dir*/plugins/recaptcha/ directory. Copy the files in the admin directory to the *admin*/plugins/recaptcha/ directory your created in step 2.
+1.  Uncompress the recaptcha plugin archive while in the <geeklog_dir>/plugins directory. The archive will create a directory called recaptcha in the plugins directory.
+2.  Create the admin directory. Under your <admin>/plugins/ directory, create a directory called recaptcha.
+3.  Change to your <geeklog_dir>/plugins/recaptcha/ directory. Copy the files in the admin directory to the <admin>/plugins/recaptcha/ directory your created in step 2.
 4.  Log in to your Geeklog as a root user, go to the plugin editor and click on reCAPTCHA. If the install failed, examine Geeklog system errorlog for possible problems.
 5.  **Important**: Set up API keys. Go to the Configuration and enter reCAPTCHA API Public Key and Private Key that you can get at [https://www.google.com/recaptcha/admin/create](https://www.google.com/recaptcha/admin/create). **It is not until you set the API keys that you can use reCAPTCHA service.**
 
 ## UNINSTALL
 
 1.  Log in to your Geeklog web site as a root user, go to the plugin editor and click on reCAPTCHA.  If the unstall failed, examine Geeklog system errorlog for possible problems.
-2.  Delete the two plugin directories created in the install process: <geeklog-dir>/plugins/recaptcha/ and *admin*/plugins/recaptcha/.
+2.  Delete the two plugin directories created in the install process: <geeklog-dir>/plugins/recaptcha/ and <admin>/plugins/recaptcha/.
 
 ## UPGRADE
 
@@ -41,6 +41,8 @@ In the following descriptions
 
 | Version | Date(YYYY-MM-DD) |Description                                                                         |
 |:-------:|-----------------:|------------------------------------------------------------------------------------|
-|   1.1.0 |       2015-07-03 |1. Upgraded to Google reCAPTCHA v2  2. Added an error code to a log file(logs/recaptch.log) entry. Patch provided by Tom.|
-|   1.0.1 |       2014-01-26 |1. Added a <div> tag to enclose the reCAPTCHA code. Patch provided by Tom.  2. Changed to write log entries into "logs/recaptch.log". Patch provided by Tom.     |
-|   1.0.0 |       2014-01-24 |1.Initial release                                                                   |
+|   1.1.0 |       2015-07-03 |* Upgraded to Google reCAPTCHA v2                                                   |
+|         |                  |* Added an error code to a log file(logs/recaptch.log) entry. Patch provided by Tom.|
+|   1.0.1 |       2014-01-26 |* Added a <div> tag to enclose the reCAPTCHA code. Patch provided by Tom.           |
+|         |                  |* Changed to write log entries into "logs/recaptch.log". Patch provided by Tom.     |
+|   1.0.0 |       2014-01-24 |* Initial release                                                                   |
