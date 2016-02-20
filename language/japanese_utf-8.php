@@ -30,18 +30,19 @@
 // +---------------------------------------------------------------------------|
 
 if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== FALSE) {
-	die('This file can not be used on its own!');
+	die('This file cannot be used on its own!');
 }
 
 $LANG_RECAPTCHA = array (
-	'plugin' => 'reCAPTCHA',
-	'admin'  => 'reCAPTCHA',
+	'plugin'      => 'reCAPTCHA',
+	'admin'       => 'reCAPTCHA',
+	'entry_error' => '%sで無効な入力を検出しました。IPアドレス: %s',	// 1st %s = $type, 2nd %s = $ip
 );
 
 // Localization of the Admin Configuration UI
 $LANG_configsections['recaptcha'] = array(
-	'label' => $LANG_RECAPTCHA['plugin'],
-	'title' => $LANG_RECAPTCHA['plugin'] . 'の設定',
+	'label' => 'reCAPTCHA',
+	'title' => 'reCAPTCHAの設定',
 );
 
 $LANG_confignames['recaptcha'] = array(

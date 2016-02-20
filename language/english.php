@@ -34,8 +34,9 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== FALSE) {
 }
 
 $LANG_RECAPTCHA = array(
-	'plugin' => 'reCAPTCHA',
-	'admin'  => 'reCAPTCHA',
+	'plugin'      => 'reCAPTCHA',
+	'admin'       => 'reCAPTCHA',
+	'entry_error' => 'An invalid reCAPTCHA string was entered in %s - IP Address: %s',	// 1st %s = $type, 2nd %s = $ip
 );
 
 // Localization of the Admin Configuration UI

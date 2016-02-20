@@ -139,14 +139,17 @@ function plugin_upgrade_recaptcha() {
 	$pi_version = $A['pi_version'];		// Version info stored in database
 
 	// Does upgrading
-// 	switch ($pi_version) {
-// 		case '':
-// 		break;
-// 		
-// 		case '':
-// 		break;
-// 		
-// 	}
+	while (version_compare($pi_version, $_RECAPTCHA_CONF['pi_version']) < 0) {
+		switch ($pi_version) {
+			case '1.0.0':
+				$pi_version = '1.0.1';
+				break;
+
+			default:
+				$pi_version = $_RECAPTCHA_CONF['pi_version'];
+				break;
+		}
+	}
 
 	// Updates plugin info
 	$sql = "UPDATE {$_TABLES['plugins']} "
@@ -230,7 +233,7 @@ function plugin_templatesetvars_recaptcha($type, &$template) {
 			$use_ssl = false;
 		}
 
-		$captcha = recaptcha_get_html($_RECAPTCHA_CONF['public_key'], $error, $use_ssl);
+		$captcha = '<div class="gl-recaptcha_' . $type . '">' . recaptcha_get_html($_RECAPTCHA_CONF['public_key'], $error, $use_ssl) . '</div>';
 	} else {
 		$captcha = '';
 	}
@@ -257,7 +260,7 @@ function plugin_commentPreSave_recaptcha($uid, $title, $comment, $sid, $pid, $ty
 * @return    string    empty = success
 */
 function plugin_itemPreSave_recaptcha($type, $content = '') {
-	global $_RECAPTCHA_CONF;
+	global $_RECAPTCHA_CONF, $LANG_RECAPTCHA, $_SERVER;
 
 	$msg = '';
 
@@ -275,15 +278,50 @@ function plugin_itemPreSave_recaptcha($type, $content = '') {
 		);
 
 		if (!$answer->is_valid) {
-			$msg = $answer->error;
-
 			if ($_RECAPTCHA_CONF['logging']) {
-				COM_errorLog('reCAPTCHA error: ' . $msg);
+				$msg = sprintf(
+					RECAPTCHA_str('entry_error', true),
+					$type,
+					$_SERVER['REMOTE_ADDR']
+				);
+				$msg = RECAPTCHA_esc($msg);
+				reCAPTCHA_errorLog($msg);
 			}
 		}
 	}
 
 	return $msg;
+}
+
+/**
+* Writes an entry into a log file
+*
+* @param    string    $logentry
+* @param    int       $override
+*/
+function reCAPTCHA_errorLog($logentry, $override = 0) {
+	global $_CONF, $_RECAPTCHA_CONF;
+
+	if (!isset($_RECAPTCHA_CONF['logging'])) {
+		$_RECAPTCHA_CONF['logging'] = 0;
+	}
+
+	if (($_RECAPTCHA_CONF['logging'] != 1) && ($override == 0)) {
+		return;
+	}
+
+	if (!empty($logentry)) {
+		$timestamp = date('Y-m-d H:i:s');
+		$logfile = $_CONF['path_log'] . 'recaptcha.log';
+		$entry   = "{$timestamp} - {$logentry} \n";
+		
+		if (($file = @fopen($logfile, 'a')) !== false) {
+			fputs($file, "$timestamp - $logentry \n");
+			fclose($file);
+		} else {
+			COM_errorLog(__FUNCTION__ . ': cannot open "' . $logfile . '"');
+		}
+	}
 }
 
 /**

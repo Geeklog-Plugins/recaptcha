@@ -48,13 +48,19 @@ code {
 table {
   width: 100%;
   border: solid 1px black;
+  border-collapse: collapse;
+}
+
+tr {
+  border: solid 1px black;
 }
 
 td, th {
-  vertical-align: top;
+  vertical-align: middle;
   padding: 4px;
   line-height: 128%;
   font-size: smaller;
+  border: solid 1px black;
 }
 
 th {
