@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<link href="../docstyle.css" rel="stylesheet" type="text/css">
+	<title>Geeklog reCAPTCHAプラグイン</title>
+</head>
+
+<body>
+	<h1>Geeklog reCAPTCHAプラグインのインストール/アンインストール</h1>
+
+	<h2>reCAPTCHAとは</h2>
+
+	<p>ReCAPTCHA&reg;は強力な<acronym title="Completely Automated Public Turing test to tell Computers and Humans Apart">CAPTCHA</acronym>を提供する無料の対ボットシステムです。このプラグインを使うことで、GeeklogでreCAPTCHAを簡単に利用できるようになります。</p>
+
+	<h2>インストール:</h2>
+
+	<p>以下の説明で、</p>
+	<ul>
+		<li><span class="geeklog">&lt;geeklog_dir&gt;</span>は、システムのdb-config.php が存在するディレクトリ</li>
+		<li><span class="admin">&lt;admin&gt;</span>は、管理者用ファイルが存在するディレクトリ（ふつうは、<span class="public">&lt;public_html&gt;</span>ディレクトリの下）</li>
+	</ul>
+	<p>を表しています。</p>
+
+	<ol>
+		<li>recaptchaプラグインのアーカイブを<span class="geeklog">&lt;geeklog_dir&gt;</span>/pluginsディレクトリに展開します。recaptchaという名前のディレクトリができます。</li>
+		<li>adminディレクトリを作ります。<span class="admin">&lt;admin&gt;</span>/plugins/ ディレクトリの下にrecaptchaという名前のディレクトリを作ります。</li>
+		<li><span class="geeklog">&lt;geeklog_dir&gt;</span>/plugins/recaptcha/ ディレクトリに移動します。adminディレクトリの内容を、2.で作成した <span class="admin">&lt;admin&gt;</span>/plugins/recaptcha/ ディレクトリにコピーします。</li>
+		<li>管理者としてログインし、プラグインエディタからインストールを実行します。失敗した場合には、エラーログ（error.log）を調べてください。</li>
+		<li style="background-color: #ff99ff;"><strong>重要</strong>: APIキーを設定します。<a href="https://www.google.com/recaptcha/admin/create">https://www.google.com/recaptcha/admin/create</a>でサインアップして、APIキーを入手してください。<strong>取得したPublic KeyとPrivate Keyをコンフィギュレーションで設定して初めて、reCAPTCHAを使用できるようになります</strong>。</li>
+	</ol>
+
+	<h2>アンインストール:</h2>
+
+	<ol>
+		<li>プラグインエディタから、recaptchaプラグインをアンインストールします。</li>
+		<li>インストールの過程で作成した2つのディレクトリ（<span class="geeklog">&lt;geeklog-dir&gt;</span>/plugins/recaptcha/と<span class="admin">&lt;admin&gt;</span>/plugins/recaptcha/ を削除します。</li>
+	</ol>
+
+	<p>これでおしまいです。</p>
+
+</body>
+</html>
