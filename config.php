@@ -37,7 +37,7 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== false) {
 $_RECAPTCHA_CONF = array();
 
 // Plugin info
-$_RECAPTCHA_CONF['pi_version'] = '1.1.2';					// Plugin Version
+$_RECAPTCHA_CONF['pi_version'] = '1.1.3';					// Plugin Version
 $_RECAPTCHA_CONF['gl_version'] = '1.5.0';					// GL Version plugin for
 $_RECAPTCHA_CONF['pi_url']     = 'http://mystral-kk.net/';	// Plugin Homepage
 $_RECAPTCHA_CONF['GROUPS']     = array(

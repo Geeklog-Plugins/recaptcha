@@ -1,7 +1,7 @@
 # Install/Uninstall/Upgrade instruction for the Geeklog reCAPTCHA plugin
 
 * Repository: https://github.com/mystralkk/recaptcha
-* Version: 1.1.0
+* Version: 1.1.3
 * License: GPL v2 or later
 
 ## What is reCAPTCHA?
@@ -41,7 +41,9 @@ In the following descriptions
 
 | Version | Date(YYYY-MM-DD) |Description                                                                         |
 |:-------:|-----------------:|------------------------------------------------------------------------------------|
-|   1.1.0 |       2015-07-03 |* Upgraded to Google reCAPTCHA v2                                                   |
+|   1.1.3 |       2016-08-12 |* Replaced COM_siteHeader and COM_siteFooter with COM_createHTMLDocument.           |
+|   1.1.2 |       2016-02-20 |* Modified to use reCAPTCHA v1.1.2 library.                                         |
+|   1.1.0 |       2015-07-03 |* Upgraded to Google reCAPTCHA v2.                                                  |
 |         |                  |* Added an error code to a log file(logs/recaptch.log) entry. Patch provided by Tom.|
 |   1.0.1 |       2014-01-26 |* Added a <div> tag to enclose the reCAPTCHA code. Patch provided by Tom.           |
 |         |                  |* Changed to write log entries into "logs/recaptch.log". Patch provided by Tom.     |
