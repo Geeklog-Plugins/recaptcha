@@ -10,7 +10,7 @@ ReCAPTCHA(R) is a free anti-bot service providing powerful CAPTCHA(Completely Au
 
 ## System Requirements
 
-* Geeklog-1.5.0+
+* Geeklog-1.6.0+
 * PHP-5.3.2+.  Maybe PHP-5-3.0 or PHP-5.3.1 will do, but I am not sure.
 
 ## INSTALL
