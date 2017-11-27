@@ -46,8 +46,8 @@ $LANG_configsections['recaptcha'] = array(
 );
 
 $LANG_confignames['recaptcha'] = array(
-	'public_key'          => 'reCAPTCHA API Public Key',
-	'private_key'         => 'reCAPTCHA API Private Key',
+	'public_key'          => 'reCAPTCHA API Site Key',
+	'private_key'         => 'reCAPTCHA API Secret Key',
 	'logging'             => '無効な入力をログファイルに記録する',
     'anonymous_only'      => 'ゲストユーザーに対してのみ使用する',
 	'remoteusers'         => 'リモートユーザー全員に強制する',
@@ -56,6 +56,8 @@ $LANG_confignames['recaptcha'] = array(
 	'enable_emailstory'   => '「記事をメールする」をサポートする',
 	'enable_forum'        => '掲示板プラグインをサポートする',
 	'enable_registration' => 'ユーザー登録をサポートする',
+	'enable_loginform'    => 'ログインフォームをサポートする',
+	'enable_getpassword'  => 'パスワード再設定フォームをサポートする',
 	'enable_mediagallery' => 'メディアギャラリープラグインをサポートする',
 	'enable_rating'       => 'レーティングプラグインをサポートする',
 	'enable_story'        => '記事投稿をサポートする',

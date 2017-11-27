@@ -41,9 +41,9 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== false) {
 * records.  These settings are only used during the initial installation
 * and not referenced any more once the plugin is installed
 */
-global $_RC_DEFAULT;
+global $_RECAPTCHA_DEFAULT;
 
-$_RC_DEFAULT = array(
+$_RECAPTCHA_DEFAULT = array(
 	'public_key'          => '',
 	'private_key'         => '',
 	'logging'             => 0,
@@ -54,6 +54,8 @@ $_RC_DEFAULT = array(
 	'enable_emailstory'   => 1,
 	'enable_forum'        => 1,
 	'enable_registration' => 1,
+	'enable_loginform'    => 1,
+	'enable_getpassword'  => 1,
 	'enable_mediagallery' => 1,
 	'enable_rating'       => 1,
 	'enable_story'        => 1,
@@ -65,16 +67,14 @@ $_RC_DEFAULT = array(
 * Initializes reCAPTCHA plugin configuration
 *
 * Creates the database entries for the configuation if they don't already
-* exist.  Initial values will be taken from $_RC_DEFAULT
-* if available (e.g. from an old config.php), uses $_RC_DEFAULT
+* exist.  Initial values will be taken from $_RECAPTCHA_DEFAULT
+* if available (e.g. from an old config.php), uses $_RECAPTCHA_DEFAULT
 * otherwise.
 *
 * @return   boolean     true: success; false: an error occurred
 */
 function plugin_initconfig_recaptcha() {
-	global $_RECAPTCHA_CONF, $_RC_DEFAULT;
-
-	global $_RC_DEFAULT;
+	global $_RECAPTCHA_CONF, $_RECAPTCHA_DEFAULT;
 
 	$c = config::get_instance();
 	$me = 'recaptcha';
@@ -89,40 +89,44 @@ function plugin_initconfig_recaptcha() {
 		// Fieldset = 0
 		$fs = 0;
 		$c->add('fs_system', null, 'fieldset', $sg, $fs, null, 0, true, $me, 0);
-		$c->add('public_key', $_RC_DEFAULT['public_key'], 'text', $sg, $fs, null, $so, true, $me, 0);
+		$c->add('public_key', $_RECAPTCHA_DEFAULT['public_key'], 'text', $sg, $fs, null, $so, true, $me, 0);
 		$so += 10;
-		$c->add('private_key', $_RC_DEFAULT['private_key'], 'text', $sg, $fs, null, $so, true, $me, 0);
+		$c->add('private_key', $_RECAPTCHA_DEFAULT['private_key'], 'text', $sg, $fs, null, $so, true, $me, 0);
 		$so += 10;
-		$c->add('logging', $_RC_DEFAULT['logging'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('logging', $_RECAPTCHA_DEFAULT['logging'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
 
 		// Subgroup = 0, Fieldset = 1
 		$fs++;
 		$c->add('fs_integration', null, 'fieldset', $sg, $fs, null, 0, true, $me, 0);
-		$c->add('anonymous_only', $_RC_DEFAULT['anonymous_only'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('anonymous_only', $_RECAPTCHA_DEFAULT['anonymous_only'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		 $c->add('remoteusers', $_RC_DEFAULT['remoteusers'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('remoteusers', $_RECAPTCHA_DEFAULT['remoteusers'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_comment', $_RC_DEFAULT['enable_comment'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_comment', $_RECAPTCHA_DEFAULT['enable_comment'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_contact', $_RC_DEFAULT['enable_contact'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_contact', $_RECAPTCHA_DEFAULT['enable_contact'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_emailstory', $_RC_DEFAULT['enable_emailstory'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_emailstory', $_RECAPTCHA_DEFAULT['enable_emailstory'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_forum', $_RC_DEFAULT['enable_forum'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_forum', $_RECAPTCHA_DEFAULT['enable_forum'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_registration', $_RC_DEFAULT['enable_registration'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_registration', $_RECAPTCHA_DEFAULT['enable_registration'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_mediagallery', $_RC_DEFAULT['enable_mediagallery'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_mediagallery', $_RECAPTCHA_DEFAULT['enable_mediagallery'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_rating', $_RC_DEFAULT['enable_rating'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_rating', $_RECAPTCHA_DEFAULT['enable_rating'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_story', $_RC_DEFAULT['enable_story'], 'select', $sg, $fs, 0, $so, true, $me, 0); 
+		$c->add('enable_story', $_RECAPTCHA_DEFAULT['enable_story'], 'select', $sg, $fs, 0, $so, true, $me, 0); 
 		$so += 10;
-		$c->add('enable_calendar', $_RC_DEFAULT['enable_calendar'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_calendar', $_RECAPTCHA_DEFAULT['enable_calendar'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
-		$c->add('enable_links', $_RC_DEFAULT['enable_links'], 'select', $sg, $fs, 0, $so, true, $me, 0);
+		$c->add('enable_links', $_RECAPTCHA_DEFAULT['enable_links'], 'select', $sg, $fs, 0, $so, true, $me, 0);
 		$so += 10;
+
+		// Subgroup = 1, Fieldset = 0
+		require_once dirname(__FILE__) . '/install_updates.php';
+		recaptcha_update_ConfValues_1_1_5();
 	}
 
 	return true;

@@ -142,15 +142,16 @@ function plugin_upgrade_recaptcha() {
 	while (version_compare($pi_version, $_RECAPTCHA_CONF['pi_version']) < 0) {
 		switch ($pi_version) {
 			case '1.0.0':
-				$pi_version = '1.0.1';
-				break;
-
 			case '1.0.1':
-				$pi_version = '1.1.0';
-				break;
-
 			case '1.1.0':
-				$pi_version = '1.1.2';
+			case '1.1.1':
+			case '1.1.2':
+			case '1.1.3':
+			case '1.1.4':
+			case '1.1.5':
+				require_once dirname(__FILE__) . '/install_updates.php';
+				recaptcha_update_ConfValues_1_1_5();
+				$pi_version = '1.1.6';
 				break;
 
 			default:
@@ -160,8 +161,7 @@ function plugin_upgrade_recaptcha() {
 	}
 
 	// Updates plugin info
-	$sql = "UPDATE {$_TABLES['plugins']} "
-		 . "SET pi_version = '{$_RECAPTCHA_CONF['pi_version']}' "
+	$sql = "UPDATE {$_TABLES['plugins']} SET pi_version = '{$_RECAPTCHA_CONF['pi_version']}' "
 		 . "WHERE (pi_name = 'recaptcha') ";
 	$result = DB_query($sql);
 	COM_errorLog("reCAPTCHA plugin was successfully updated to version {$_RECAPTCHA_CONF['pi_version']}.");

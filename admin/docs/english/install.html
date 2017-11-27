@@ -16,7 +16,10 @@
 
 <h2>System Requirements</h2>
 
-<p style="background-color: #ff99ff;">Since v1.1.0, PHP-5.3.2 or later is required.  Maybe PHP-5-3.0 or PHP-5.3.1 will do, but I am not sure.</p>
+<ul>
+	<li style="background-color: #ff99ff;">Since v1.1.0, PHP-5.3.2 or later is required.  Maybe PHP-5-3.0 or PHP-5.3.1 will do, but I am not sure.</li>
+	<li>Since v1.1.6, Geeklog 1.8.0 or newer is required.</li>
+</ul>
 
 <h2>INSTALL</h2>
 
@@ -31,7 +34,7 @@
 	<li>Create the admin directory.  Under your <span class="admin">&lt;admin&gt;</span>/plugins/ directory, create a directory called recaptcha.</li>
 	<li>Change to your <span class="geeklog">&lt;geeklog_dir&gt;</span>/plugins/recaptcha/ directory.  Copy the files in the admin directory to the <span class="admin">&lt;admin&gt;</span>/plugins/recaptcha/ directory your created in step 2.</li>
 	<li>Log in to your Geeklog as a root user, go to the plugin editor and click on reCAPTCHA.  If the install failed, examine Geeklog system errorlog for possible problems.</li>
-	<li style="background-color: #ff99ff;"><strong>Important</strong>: Set up API keys.  Go to the Configuration and enter reCAPTCHA API Public Key and Private Key that you can get at <a href="https://www.google.com/recaptcha/admin/create">https://www.google.com/recaptcha/admin/create</a>.  <strong>It is not until you set the API keys that you can use reCAPTCHA service.</strong></li>
+	<li style="background-color: #ff99ff;"><strong>Important</strong>: Set up API keys.  Go to the Configuration and enter reCAPTCHA API Site Key and Secret Key that you can get at <a href="https://www.google.com/recaptcha/admin/create">https://www.google.com/recaptcha/admin/create</a>.  <strong>It is not until you set the API keys that you can use reCAPTCHA service.</strong></li>
 </ol>
 
 <h2>UNINSTALL</h2>
@@ -53,6 +56,16 @@
 
 <table>
 	<tr><th>Version</th><th>Date(YYYY-MM-DD)</th><th>Description</th></tr>
+	<tr>
+		<td>1.1.6</td><td>2017-11-27</td>
+		<td>
+			<ul>
+				<li>Added support for Login Form.</li>
+				<li>Added support for Forget Password Form.</li>
+				<li>Added support for the demo mode intruduced in Geeklog 2.2.0.</li>
+			</ul>
+		</td>
+	</tr>
 	<tr>
 		<td>1.1.5</td><td>2017-04-12</td>
 		<td>

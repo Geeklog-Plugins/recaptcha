@@ -46,8 +46,8 @@ $LANG_configsections['recaptcha'] = array(
 );
 
 $LANG_confignames['recaptcha'] = array(
-	'public_key'          => 'reCAPTCHA API Public Key',
-	'private_key'         => 'reCAPTCHA API Private Key',
+	'public_key'          => 'reCAPTCHA API Site Key',
+	'private_key'         => 'reCAPTCHA API Secret Key',
 	'logging'             => 'Log invalid reCAPTCHA attempts',
 	'anonymous_only'      => 'Anonymous Only',
 	'remoteusers'         => 'Force CAPTCHA for all Remote Users',
@@ -56,6 +56,8 @@ $LANG_confignames['recaptcha'] = array(
 	'enable_emailstory'   => 'Enable Email Story Support',
 	'enable_forum'        => 'Enable Forum Support',
 	'enable_registration' => 'Enable Registration Support',
+	'enable_loginform'    => 'Enable Login Form Support',
+	'enable_getpassword'  => 'Enable Get Password Form Support',
 	'enable_mediagallery' => 'Enable Media Gallery (Postcards) Support',
 	'enable_rating'       => 'Enable Rating Plugin Support',
 	'enable_story'        => 'Enable Story Support',

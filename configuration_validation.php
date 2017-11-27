@@ -36,19 +36,23 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== false) {
 
 // reCAPTCHA Plugin Main Settings
 $_CONF_VALIDATE['recaptcha'] = array(
-	'public_key'          => array('rule' => 'stringOrEmpty'),
-	'private_key'         => array('rule' => 'stringOrEmpty'),
-	'logging'             => array('rule' => array('inList', array('0', '1'), true)),
-	'anonymous_only'      => array('rule' => array('inList', array('0', '1'), true)),
-	'remoteusers'         => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_comment'      => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_contact'      => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_emailstory'   => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_forum'        => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_registration' => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_mediagallery' => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_rating'       => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_story'        => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_calendar'     => array('rule' => array('inList', array('0', '1'), true)),
-	'enable_links'        => array('rule' => array('inList', array('0', '1'), true)),
+	'public_key'           => array('rule' => 'stringOrEmpty'),
+	'private_key'          => array('rule' => 'stringOrEmpty'),
+	'logging'              => array('rule' => array('inList', array('0', '1'), true)),
+	'anonymous_only'       => array('rule' => array('inList', array('0', '1'), true)),
+	'remoteusers'          => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_comment'       => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_contact'       => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_emailstory'    => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_forum'         => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_registration'  => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_mediagallery'  => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_rating'        => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_story'         => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_calendar'      => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_links'         => array('rule' => array('inList', array('0', '1'), true)),
+	
+	// Since reCAPTCHA v1.1.6
+	'enable_getpassword'   => array('rule' => array('inList', array('0', '1'), true)),
+	'enable_loginform'     => array('rule' => array('inList', array('0', '1'), true)),
 );

@@ -37,9 +37,9 @@ if (stripos($_SERVER['PHP_SELF'], basename(__FILE__)) !== false) {
 $_RECAPTCHA_CONF = array();
 
 // Plugin info
-$_RECAPTCHA_CONF['pi_version'] = '1.1.5';					// Plugin Version
-$_RECAPTCHA_CONF['gl_version'] = '1.6.0';					// GL Version plugin for
-$_RECAPTCHA_CONF['pi_url']     = 'https://mystral-kk.net/';	// Plugin Homepage
+$_RECAPTCHA_CONF['pi_version'] = '1.1.6';											// Plugin Version
+$_RECAPTCHA_CONF['gl_version'] = '1.8.0';											// GL Version plugin for
+$_RECAPTCHA_CONF['pi_url']     = 'https://github.com/Geeklog-Plugins/recaptcha';	// Plugin Homepage
 $_RECAPTCHA_CONF['GROUPS']     = array(
 	'reCAPTCHA Admin' => 'Users in this group can administer the ReCAPTCHA plugin',
 );
@@ -52,6 +52,6 @@ $_RECAPTCHA_CONF['MAPPINGS']   = array(
 
 // Items the reCAPTCHA plugin supports
 $_RECAPTCHA_CONF['supported_items'] = array(
-	'comment', 'story', 'registration', 'contact', 'emailstory', 'forum',
-	'mediagallery', 'rating', 'links', 'calendar',
+	'comment', 'story', 'registration', 'loginform', 'getpassword', 'contact',
+	'emailstory', 'forum', 'mediagallery', 'rating', 'links', 'calendar',
 );

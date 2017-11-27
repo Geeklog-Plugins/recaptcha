@@ -16,7 +16,10 @@
 
 <h2>システム要件</h2>
 
-<p style="background-color: #ff99ff;">バージョン1.1.0以降、PHP-5.3.2が必要になりました。PHP-5-3.0やPHP-5.3.1でも動作すると思いますが、確認はしていません。</p>
+<ul>
+	<li style="background-color: #ff99ff;">バージョン1.1.0以降、PHP-5.3.2が必要になりました。PHP-5-3.0やPHP-5.3.1でも動作すると思いますが、確認はしていません。</li>
+	<li>バージョン1.1.6以降、Geeklog 1.8.0以降が必要になりました。</li>
+</ul>
 
 <h2>インストール</h2>
 
@@ -32,7 +35,7 @@
 	<li>adminディレクトリを作ります。<span class="admin">&lt;admin&gt;</span>/plugins/ ディレクトリの下にrecaptchaという名前のディレクトリを作ります。</li>
 	<li><span class="geeklog">&lt;geeklog_dir&gt;</span>/plugins/recaptcha/ ディレクトリに移動します。adminディレクトリの内容を、2.で作成した <span class="admin">&lt;admin&gt;</span>/plugins/recaptcha/ ディレクトリにコピーします。</li>
 	<li>管理者としてログインし、プラグインエディタからインストールを実行します。失敗した場合には、エラーログ（error.log）を調べてください。</li>
-	<li style="background-color: #ff99ff;"><strong>重要</strong>: APIキーを設定します。<a href="https://www.google.com/recaptcha/admin/create">https://www.google.com/recaptcha/admin/create</a>でサインアップして、APIキーを入手してください。<strong>取得したPublic KeyとPrivate Keyをコンフィギュレーションで設定して初めて、reCAPTCHAを使用できるようになります</strong>。</li>
+	<li style="background-color: #ff99ff;"><strong>重要</strong>: APIキーを設定します。<a href="https://www.google.com/recaptcha/admin/create">https://www.google.com/recaptcha/admin/create</a>でサインアップして、APIキーを入手してください。<strong>取得したSite KeyとSecret Keyをコンフィギュレーションで設定して初めて、reCAPTCHAを使用できるようになります</strong>。</li>
 </ol>
 
 <h2>アンインストール</h2>
@@ -54,6 +57,16 @@
 
 <table>
 	<tr><th>バージョン</th><th>日付(YYYY-MM-DD)</th><th>説明</th></tr>
+	<tr>
+		<td>1.1.6</td><td>2017-11-27</td>
+		<td>
+			<ul>
+				<li>パスワード再設定フォームをサポートしました。</li>
+				<li>ログインフォームをサポートしました。</li>
+				<li>Geeklog 2.2.0で導入されるデモモードをサポートしました。</li>
+			</ul>
+		</td>
+	</tr>
 	<tr>
 		<td>1.1.5</td><td>2017-04-12</td>
 		<td>
