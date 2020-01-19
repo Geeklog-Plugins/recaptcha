@@ -1,4 +1,6 @@
-# Install/Uninstall/Upgrade instruction for the Geeklog reCAPTCHA plugin
+# NOTE: the reCAPTCHA plugin is bundled with Geeklog 2.2.0 or newer, so this repository is now archived just for information.
+
+## Install/Uninstall/Upgrade instruction for the Geeklog reCAPTCHA plugin
 
 * Repository: https://github.com/mystralkk/recaptcha
 * Version: 1.2.0
